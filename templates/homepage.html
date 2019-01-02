@@ -1,0 +1,97 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MyFlaskApp</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+  <body>
+  <center><i><u><h1>Student Information</h1></u></i></center><hr>
+  <center><h3>Insert a new record</h3>
+      <a href="./addclassdet" class="btn btn-success"> Add Class Details</a>
+
+    <form method="POST" action="/">
+        Name:<input type="text" name="name"/>
+
+        ClassId:<input type="text" name="classid"/>
+          <input class="btn btn-success" type="submit" value="Add">
+    </form>
+</center>
+  <hr>
+<table class="table">
+
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">ClassId</th>
+      <th scope="col">Created On</th>
+        <th scope="col">Updated On</th>
+         <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for student in students %}
+    <tr>
+      <th scope="row">{{student.id}}</th>
+      <td>{{student.name}}</td>
+      <td>{{student.class_id}}</td>
+
+        <td>{{student.createdon}}</td>
+        <td>{{student.updatedon}}</td>
+         <td>
+             <form method="POST" action="./updaterecord" style="display: inline">
+              <input type="hidden" value="{{student.name}}" name="name">
+                 <input type="hidden" value="{{student.id}}" name="studentid">
+             <input type="hidden" value="{{student.class_id}}" name="studentclassid">
+              <input class="btn btn-primary" type="submit" value="UPDATE">
+            </form>
+
+            <form method="POST" action="./delete" style="display: inline">
+              <input type="hidden" value="{{student.id}}" name="studentid">
+              <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+        </td>
+
+    </tr>
+{% endfor %}
+  </tbody>
+
+</table><!--
+    <h1>Students</h1>
+    {% for student in students %}
+      <p>{{student.name}}</p>
+      <p>{{student.id}}</p>
+      <p>{{student.class_id}}</p>
+      <p>{{student.createdon}}</p>
+      <p>{{student.updatedon}}</p>
+    {% endfor %}-->
+
+<!--
+
+  {% for studentUpdate in students %}
+  <p>{{studentUpdate.name}}</p>
+         <p>{{studentUpdate.class_id}}</p>
+
+   <form method="POST" action="./update" style="display: inline">
+              <input type="hidden" value="{{studentUpdate.name}}" name="oldName">
+              <input type="text" value="{{studentUpdate.name}}" name="newName">
+
+
+
+              <input type="hidden" value="{{studentUpdate.class_id}}" name="oldClassId">
+              <input type="text" value="{{studentUpdate.class_id}}" name="newClassId">
+       <input type="hidden" value="{{studentUpdate.id}}" name="studentId">
+              <input type="submit" value="Update">
+            </form>
+  {% endfor %}
+-->
+
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>
+
+
+

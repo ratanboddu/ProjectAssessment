@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<center><h3>Insert a new record</h3>
+
+    <form method="POST" action="/addclass">
+        Class Name :<input type="text" name="class_name"/>
+
+        Class Leader:<input type="text" name="class_leader"/>
+          <input class="btn btn-success" type="submit" value="Add">
+    </form>
+
+    {% for class in classinfo %}
+
+     {class.id}}
+      {{class.name}}
+      {{class.class_leader}}
+
+        {{student.createdon}}
+        {{student.updatedon}}
+    {% endfor %}
+</body>
+</html>
