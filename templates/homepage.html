@@ -10,8 +10,12 @@
   <center><h3>Insert a new record</h3>
 
       <a href="./show_class" class="btn btn-success"> Show Class Details</a>
-      <a href="./add_new_record" class="btn btn-success"> Add Record</a>
-
+      <a href="./add_new_record" class="btn btn-success"> Add Record</a><br><br>
+      {%- for category, message in get_flashed_messages(with_categories = true) %}
+<div class="alert alert-danger">
+    {{ message }}
+</div>
+{%- endfor %}
 </center>
   <hr>
 <table class="table">

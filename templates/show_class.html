@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Class Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-
+<center>
+    <h1>CLASS DETAILS</h1><hr>
+    <a href="/" class="btn btn-success">Back to Homepage </a><br><br>
    <form method="POST" action="/show_class">
 
         ClassId Dropdown : <select name="selectedid">
@@ -21,17 +24,32 @@
 
           <input class="btn btn-success" type="submit" value="Show">
     </form>
+    <hr>
+</center>
 
-
-
+<table class="table">
+  <thead>
+  <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+  </tr>
+  </thead>
+    <tbody>
 {% if students is not none %}
-     {% for relation in students.student %}
-        {{relation.id}} - {{relation.name}}<br>
+<center><h3>Class Leader ID : {{students.class_leader}}</h3></center><br>
+   {% for relation in students.student %}
+<tr>
+      <td>{{relation.id}}</td>
+      <td>{{relation.name}}</td>
+          <br>
+      </tr>
      {% endfor %}
+ </tbody>
 {% else %}
         <p>Please select an option</p>
    {% endif %}
-
+</table>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>

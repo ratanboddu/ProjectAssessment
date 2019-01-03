@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Update Record</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
@@ -18,15 +18,14 @@ Enter the new details : <br>
 
 
               <input type="hidden" value="{{students.class_id}}" name="oldClassId">
-              ClassId Dropdown :
-                <select name="newClassId">
-                    {% for class in classdet %}
-                        <option value="{{class.id}}">
-                                {{class.name}} - {{class.id}}
 
-                         </option>
-                    {% endfor %}
-                </select>
+
+        </select>
+       Appoint as Class Leader :
+       <select name="classleader">
+  <option value="Yes">Yes</option>
+  <option value="No">No</option>
+   </select>
               <input type="hidden" value="{{students.id}}" name="studentId">
               <input class="btn btn-success" type="submit" value="Update">
             </form>
