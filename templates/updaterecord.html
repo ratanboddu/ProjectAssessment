@@ -18,8 +18,15 @@ Enter the new details : <br>
 
 
               <input type="hidden" value="{{students.class_id}}" name="oldClassId">
-              Class ID : <input type="text" value="{{students.class_id}}" name="newClassId">
+              ClassId Dropdown :
+                <select name="newClassId">
+                    {% for class in classdet %}
+                        <option value="{{class.id}}">
+                                {{class.name}} - {{class.id}}
 
+                         </option>
+                    {% endfor %}
+                </select>
               <input type="hidden" value="{{students.id}}" name="studentId">
               <input class="btn btn-success" type="submit" value="Update">
             </form>

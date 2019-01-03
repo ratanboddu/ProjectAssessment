@@ -13,24 +13,26 @@ class Student(db.Model):
     id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
     name = db.Column(db.String(500), unique=False, nullable=False, primary_key=False)
     class_id = db.Column(db.Integer, db.ForeignKey('class.id'))
-    classinfo = db.relationship("Class")
     createdon = db.Column(db.String(500), unique=False, nullable=True, primary_key=False)
     updatedon = db.Column(db.String(500), unique=False, nullable=True, primary_key=False)
 
-    def __repr__(self, name, id, class_id, createdon, updatedon):
-        self.name = name
-        self.id = id
-        self.class_id = class_id
-        self.createdon = createdon
-        self.updatedon = updatedon
-        return "<Name: {}, Id: {}, Class Id: {}, Created On:{}>".format(self.name, self.id, self.class_id, self.createdon)
+    #def __repr__(self, name, id, class_id, createdon, updatedon):
+    #   self.name = name
+    #    self.id = id
+    #    self.class_id = class_id
+    #    self.createdon = createdon
+    #    self.updatedon = updatedon
+    #    return "<Name: {}, Id: {}, Class Id: {}, Created On:{}>".format(self.name, self.id, self.class_id, self.createdon)
+
 
 class Class(db.Model):
-    id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
+    id = db.Column('id', db.Integer, unique=True, nullable=False, primary_key=True)
     name = db.Column(db.String(500), unique=False, nullable=False, primary_key=False)
-    students = db.relationship("Student", backref='class', lazy="dynamic")
+    student = db.relationship("Student", backref='classname')
     createdon = db.Column(db.String(500), unique=False, nullable=True, primary_key=False)
     updatedon = db.Column(db.String(500), unique=False, nullable=True, primary_key=False)
+
+
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -38,12 +40,19 @@ def home():
     if request.form:
         ts = time.gmtime()
         createdon = time.strftime("%x %X", ts)
-        student = Student(name=request.form.get("name"), class_id=request.form.get("classid"), createdon=createdon)
-        db.session.add(student)
+        classiddetail = request.form.get("selectedid")
+        detail = Class.query.filter_by(id=classiddetail).first()
+        #detail = Class(id=classiddetail, name="10th B")
+        studentdet = Student(name=request.form.get("name"), class_id=classiddetail, createdon=createdon, classname=detail)
+        db.session.add(studentdet)
         db.session.commit()
 
     students = Student.query.all()
     return render_template("homepage.html", students=students)
+
+@app.route("/add_new_record", methods=["GET", "POST"])
+def add():
+    return render_template("addrecord.html", classdetails=Class.query.all())
 
 
 @app.route("/update", methods=["GET", "POST"])
@@ -86,25 +95,13 @@ def updaterecord():
     studentId=request.form.get("studentid")
     studentUpdate = Student.query.filter_by(id=studentId).first()
 
-    return render_template("updaterecord.html", students=studentUpdate)
+    return render_template("updaterecord.html", students=studentUpdate, classdet=Class.query.all())
 
 
-@app.route('/addclass', methods=["GET", "POST"])
-def addclassdet():
-    if request.form:
-        ts = time.gmtime()
-        createdon = time.strftime("%x %X", ts)
-        classdetails = Class(name=request.form.get("class_name"), class_leader=request.form.get("class_leader"), createdon=createdon)
-        db.session.add(classdetails)
-        db.session.commit()
-
-    classinfo = Class.query.all()
-    return render_template("addclassdet.html", classinfo=classinfo)
-
-
-@app.route('/addclassdet', methods=["GET", "POST"])
-def addclass():
-    return render_template("addclassdet.html")
+@app.route('/show_class', methods=["GET", "POST"])
+def show_details():
+    selectedid = request.form.get("selectedid")
+    return render_template("show_class.html", students=Class.query.filter_by(id=selectedid).first(), classdet=Class.query.all())
 
 
 if __name__ == "__main__":
