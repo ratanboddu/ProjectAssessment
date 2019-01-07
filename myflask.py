@@ -1,11 +1,16 @@
+""" CRUD OPERATIONS - Python Assessment"""
 import time
 from flask import Flask, flash, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import IntegrityError
+# pylint: disable=missing-docstring, C0301
+# pylint: disable=invalid-name
+
 
 # Connection to the database
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql://root:root@localhost/testcheck'
-app.config['SECRET_KEY'] = "random string"
+app.config['SECRET_KEY'] = "ratanboddu"
 db = SQLAlchemy(app)
 
 
@@ -41,16 +46,15 @@ def home():
         classleader = request.form.get("classleader")
 
         if classleader == "Yes":
-            studentdet = Student(name=request.form.get("name"), class_id=classiddetail, createdon=createdon,
-                                 classname=detail)
-            classinfo = Class.query.filter_by(id=classiddetail).first()
-            classinfo.class_leader = studentdet.id
+            student_det = Student(name=request.form.get("name"), class_id=classiddetail, createdon=createdon, classname=detail)
+            class_info = Class.query.filter_by(id=classiddetail).first()
+            class_info.class_leader = student_det.id
 
             tsu = time.gmtime()
-            updateTime = time.strftime("%x %X", tsu)
-            classinfo.updatedon = updateTime
-            db.session.add(studentdet)
-            db.session.add(classinfo)
+            update_time = time.strftime("%x %X", tsu)
+            class_info.updatedon = update_time
+            db.session.add(student_det)
+            db.session.add(class_info)
             db.session.commit()
 
         else:
@@ -73,43 +77,42 @@ def add():
 @app.route("/update", methods=["GET", "POST"])
 def update():
 
-    newName = request.form.get("newName")
-    oldClassId = request.form.get("oldClassId")
-    studentId = request.form.get("studentId")
+    new_name = request.form.get("newName")
+    old_class_id = request.form.get("oldClassId")
+    student_id = request.form.get("studentId")
     classleader = request.form.get("classleader")
 
     if classleader == "Yes":
-        studentUpdate = Student.query.filter_by(id=studentId).first()
-        classUpdate= Class.query.filter_by(id=oldClassId).first()
-        classUpdate.class_leader = studentId
-        studentUpdate.name = newName
+        student_update = Student.query.filter_by(id=student_id).first()
+        class_update = Class.query.filter_by(id=old_class_id).first()
+        class_update.class_leader = student_id
+        student_update.name = new_name
 
         tsu = time.gmtime()
-        updateTime = time.strftime("%x %X", tsu)
-        studentUpdate.updatedon = updateTime
-        classUpdate.updatedon = updateTime
+        update_time = time.strftime("%x %X", tsu)
+        student_update.updatedon = update_time
+        class_update.updatedon = update_time
 
         db.session.commit()
         return redirect("/")
 
-    else:
-        studentUpdate = Student.query.filter_by(id=studentId).first()
+    student_update = Student.query.filter_by(id=student_id).first()
 
-        studentUpdate.name = newName
+    student_update.name = new_name
 
-        tsu = time.gmtime()
-        updateTime = time.strftime("%x %X", tsu)
-        studentUpdate.updatedon = updateTime
-        db.session.commit()
-        return redirect("/")
+    tsu = time.gmtime()
+    update_time = time.strftime("%x %X", tsu)
+    student_update.updatedon = update_time
+    db.session.commit()
+    return redirect("/")
 
 
 # Perform Update Operation
 @app.route('/updaterecord', methods=["POST"])
 def updaterecord():
-    studentId=request.form.get("studentid")
-    studentUpdate = Student.query.filter_by(id=studentId).first()
-    return render_template("updaterecord.html", students=studentUpdate, classdet=Class.query.all())
+    student_id = request.form.get("studentid")
+    student_update = Student.query.filter_by(id=student_id).first()
+    return render_template("updaterecord.html", students=student_update, classdet=Class.query.all())
 
 
 # Perform Delete Operation
@@ -121,10 +124,10 @@ def delete():
         db.session.delete(student)
         db.session.commit()
         return redirect("/")
-    except:
-        flash('The Student you are trying to delete is the current Class Leader. Kindly appoint another Class Leader and try again.')
+    except IntegrityError:
+        flash('The Student you are trying to delete is the current Class Leader.'
+              ' Kindly appoint another Class Leader and try again.')
         return redirect("/")
-
 
 
 # Display Class details
