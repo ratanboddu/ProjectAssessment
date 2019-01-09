@@ -17,6 +17,11 @@ dict_update_data = {
     "classleader": "Yes",
 
 }
+dict_delete_data = {
+
+    "studentId": 9
+
+}
 
 def test_home(test_resp_code):
     abc = test_resp_code
@@ -39,10 +44,13 @@ def test_show_update(test_resp_code):
 
 def test_show_delete(test_resp_code):
     abc = test_resp_code
-    resp = abc.post('/update')
+    resp = abc.post('/delete', data=dict_delete_data)
     assert resp.status_code == 302
 
-
+def test_show_update_record(test_resp_code):
+    abc = test_resp_code
+    resp = abc.post('/update', data=dict_update_data)
+    assert resp.status_code == 302
 
 
 
