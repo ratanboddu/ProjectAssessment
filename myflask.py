@@ -42,7 +42,7 @@ def home():
         ts = time.gmtime()
         createdon = time.strftime("%x %X", ts)
         classiddetail = request.form.get("selectedid")
-        detail = Class.query.filter_by(id=classiddetail).first()
+        #detail = Class.query.filter_by(id=classiddetail).first()
         classleader = request.form.get("classleader")
 
         if classleader == "Yes":

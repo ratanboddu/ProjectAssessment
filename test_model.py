@@ -1,7 +1,3 @@
-import myflask
-import falcon
-
-
 dict_add_no = {
     "selectedid": 101,
     "classleader": "No",
@@ -15,32 +11,32 @@ dict_add_yes = {
 dict_update_data_no = {
     "newName": "Viona Gonsalves",
     "oldClassId": 101,
-    "studentId": 25,
+    "studentId": 30,
     "classleader": "No",
 
 }
 dict_update_data_yes = {
     "newName": "Viona Gonsalves",
     "oldClassId": 102,
-    "studentId": 26,
+    "studentId": 31,
     "classleader": "Yes",
 
 }
 dict_delete_data = {
 
-    "studentid": 25
+    "studentid": 30
 
 
 }
 dict_delete_data_exception = {
 
-    "studentid": 26
+    "studentid": 31
 
 
 }
 
 dict_update_record = {
-    "studentid": 25
+    "studentid": 30
 
 }
 dict_stud_id = {

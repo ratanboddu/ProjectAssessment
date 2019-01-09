@@ -1,8 +1,6 @@
 import pytest
 import myflask
-import flask
-from myflask import*
-from flask.testing import FlaskClient
+
 #
 # # Connection to the database
 # app = Flask(__name__)
