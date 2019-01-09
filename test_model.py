@@ -49,7 +49,7 @@ def test_show_delete(test_resp_code):
 
 def test_show_update_record(test_resp_code):
     abc = test_resp_code
-    resp = abc.post('/update', data=dict_update_data)
+    resp = abc.post('/update', data=dict_delete_data)
     assert resp.status_code == 302
 
 
