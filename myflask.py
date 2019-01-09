@@ -63,7 +63,7 @@ def home():
 
         else:
             studentdet = Student(name=request.form.get("name"), class_id=classiddetail, createdon=createdon,
-                                 classname=detail)
+                                 )
             db.session.add(studentdet)
             db.session.commit()
 
