@@ -35,8 +35,10 @@ def new_home_class(request):
     #return classdet
 
 
-
-
+@pytest.fixture(scope='module')
+def test_resp_code():
+    client = myflask.app.test_client()
+    return client
 
 
 
