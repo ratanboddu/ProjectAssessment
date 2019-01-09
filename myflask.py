@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError
 
 # Connection to the database
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql://root:root@localhost/testcheck'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql://root:root@localhost/pytest'
 app.config['SECRET_KEY'] = "ratanboddu"
 db = SQLAlchemy(app)
 
@@ -28,9 +28,9 @@ class Student(db.Model):
 class Class(db.Model):
     id = db.Column('id', db.Integer, unique=True, nullable=False, primary_key=True)
     name = db.Column(db.String(500), unique=False, nullable=False, primary_key=False)
-    class_leader = db.Column(db.Integer, db.ForeignKey('student.id'))
+    class_leader = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=True)
     # Making us of foreign_keys to handle multiple JOIN paths
-    student = db.relationship("Student", backref='classname', foreign_keys='Student.class_id')
+    student = db.relationship("Student", foreign_keys='Student.class_id')
     createdon = db.Column(db.String(500), unique=False, nullable=True, primary_key=False)
     updatedon = db.Column(db.String(500), unique=False, nullable=True, primary_key=False)
 
@@ -46,15 +46,19 @@ def home():
         classleader = request.form.get("classleader")
 
         if classleader == "Yes":
-            student_det = Student(name=request.form.get("name"), class_id=classiddetail, createdon=createdon, classname=detail)
-            class_info = Class.query.filter_by(id=classiddetail).first()
-            class_info.class_leader = student_det.id
+            student_det = Student(name=request.form.get("name"), class_id=classiddetail, createdon=createdon)
+            # class_info = Class.query.filter_by(id=classiddetail).first()
+            # class_info.class_leader = student_det.id
 
             tsu = time.gmtime()
             update_time = time.strftime("%x %X", tsu)
-            class_info.updatedon = update_time
+
             db.session.add(student_det)
-            db.session.add(class_info)
+
+            class_information = Class.query.filter_by(id=classiddetail).first()
+            class_information.class_leader = student_det.id
+            class_information.updatedon = update_time
+            db.session.add(class_information)
             db.session.commit()
 
         else:
@@ -86,6 +90,7 @@ def update():
         student_update = Student.query.filter_by(id=student_id).first()
         class_update = Class.query.filter_by(id=old_class_id).first()
         class_update.class_leader = student_id
+
         student_update.name = new_name
 
         tsu = time.gmtime()
