@@ -1,53 +1,53 @@
 dict_add_no = {
     "selectedid": 44426495382941689493289587869381099512,
     "classleader": "No",
-    "name": "Viona Gonsalves"
+    "name": "Archit Masurkar"
 }
 dict_add_yes = {
-    "selectedid": 44426495382941689493289587869381099512,
+    "selectedid": 62426495382941689493289587869381066556,
     "classleader": "Yes",
     "name": "Aamir Shaikh"
 }
 dict_update_data_no = {
-    "newName": "Sarvesh Deshmukh",
+    "newName": "Sarvesh D Deshmukh",
     "oldClassId": 44426495382941689493289587869381099512,
-    "studentId": 12370137359456197785269642669694263427,
+    "studentId": 128133200461758240586121768451546423427,
     "classleader": "No",
 
 }
 dict_update_data_yes = {
-    "newName": "Viona Gonsalves",
+    "newName": "Sarvesh D Deshmukh",
     "oldClassId": 44426495382941689493289587869381099512,
-    "studentId": 12370137359456197785269642669694263427,
+    "studentId": 128133200461758240586121768451546423427,
     "classleader": "Yes",
 
 }
 dict_delete_data = {
 
-    "studentid": 119927745029509598788297206850881724547
-
+    "studentid": 246714335622455588435087160597237604483,
+    "classid": 44426495382941689493289587869381099512
 
 }
 dict_delete_data_exception = {
 
-    "studentid": 12370137359456197785269642669694263427
-
+    "studentid": 274535724957053534432097441674764886147,
+    "classid": 56426495382941689493289587869381088534
 
 }
 
 dict_update_record = {
-    "studentid": 12370137359456197785269642669694263427
+    "studentid": 2272902444848516369510609141741002883
 
 }
-dict_stud_id = {
-    "studentid": 1
+dict_show_class = {
+    "selectedid": 44426495382941689493289587869381099512
 }
 
 
 # To display class details
 def test_show_class(test_resp_code):
     abc = test_resp_code
-    resp = abc.post('/show_class')
+    resp = abc.post('/show_class', data=dict_show_class)
     assert resp.status_code == 200
 
 

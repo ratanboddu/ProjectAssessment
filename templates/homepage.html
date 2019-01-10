@@ -37,8 +37,8 @@
       <td>{{student.name}}</td>
       <td>{{student.class_id}}</td>
 
-        <td>{{student.createdon}}</td>
-        <td>{{student.updatedon}}</td>
+        <td>{{student.created_on}}</td>
+        <td>{{student.updated_on}}</td>
          <td>
              <form method="POST" action="./updaterecord" style="display: inline">
               <input type="hidden" value="{{student.name}}" name="name">
@@ -49,6 +49,7 @@
 
             <form method="POST" action="./delete" style="display: inline">
               <input type="hidden" value="{{student.id}}" name="studentid">
+                <input type="hidden" value="{{student.class_id}}" name="classid">
               <input class="btn btn-danger" type="submit" value="Delete">
             </form>
         </td>
