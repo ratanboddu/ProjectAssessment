@@ -3,6 +3,7 @@ import time
 from flask import Flask, flash, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
+import uuid
 # pylint: disable=missing-docstring, C0301
 # pylint: disable=invalid-name
 
@@ -16,19 +17,19 @@ db = SQLAlchemy(app)
 
 # Creating Table Student
 class Student(db.Model):
-    id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
+    id = db.Column(db.String(500), unique=True, nullable=False, primary_key=True)
     name = db.Column(db.String(500), unique=False, nullable=False, primary_key=False)
     # Assigning Foreign Key
-    class_id = db.Column(db.Integer, db.ForeignKey('class.id'))
+    class_id = db.Column(db.String(500), db.ForeignKey('class.id'))
     createdon = db.Column(db.String(500), unique=False, nullable=True, primary_key=False)
     updatedon = db.Column(db.String(500), unique=False, nullable=True, primary_key=False)
 
 
 # Creating Table Class
 class Class(db.Model):
-    id = db.Column('id', db.Integer, unique=True, nullable=False, primary_key=True)
+    id = db.Column('id', db.String(500), unique=True, nullable=False, primary_key=True)
     name = db.Column(db.String(500), unique=False, nullable=False, primary_key=False)
-    class_leader = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=True)
+    class_leader = db.Column(db.String(500), db.ForeignKey('student.id'), nullable=True)
     # Making us of foreign_keys to handle multiple JOIN paths
     student = db.relationship("Student", foreign_keys='Student.class_id')
     createdon = db.Column(db.String(500), unique=False, nullable=True, primary_key=False)
@@ -46,7 +47,8 @@ def home():
         classleader = request.form.get("classleader")
 
         if classleader == "Yes":
-            student_det = Student(name=request.form.get("name"), class_id=classiddetail, createdon=createdon)
+            uid_id = uuid.uuid1()
+            student_det = Student(id=uid_id.int, name=request.form.get("name"), class_id=classiddetail, createdon=createdon)
             # class_info = Class.query.filter_by(id=classiddetail).first()
             # class_info.class_leader = student_det.id
 
@@ -62,7 +64,8 @@ def home():
             db.session.commit()
 
         else:
-            studentdet = Student(name=request.form.get("name"), class_id=classiddetail, createdon=createdon,
+            uid_id = uuid.uuid1()
+            studentdet = Student(id=uid_id.int, name=request.form.get("name"), class_id=classiddetail, createdon=createdon,
                                  )
             db.session.add(studentdet)
             db.session.commit()
@@ -143,4 +146,4 @@ def show_details():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(debug=True)
