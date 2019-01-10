@@ -4,46 +4,46 @@ dict_add_no = {
     "name": "Viona Gonsalves"
 }
 dict_add_yes = {
-    "selectedid": 102,
+    "selectedid": 44426495382941689493289587869381099512,
     "classleader": "Yes",
-    "name": "Viona Gonsalves"
+    "name": "Aamir Shaikh"
 }
 dict_update_data_no = {
-    "newName": "Viona Gonsalves",
-    "oldClassId": 101,
-    "studentId": 30,
+    "newName": "Sarvesh Deshmukh",
+    "oldClassId": 44426495382941689493289587869381099512,
+    "studentId": 12370137359456197785269642669694263427,
     "classleader": "No",
 
 }
 dict_update_data_yes = {
     "newName": "Viona Gonsalves",
-    "oldClassId": 102,
-    "studentId": 31,
+    "oldClassId": 44426495382941689493289587869381099512,
+    "studentId": 12370137359456197785269642669694263427,
     "classleader": "Yes",
 
 }
 dict_delete_data = {
 
-    "studentid": 30
+    "studentid": 119927745029509598788297206850881724547
 
 
 }
 dict_delete_data_exception = {
 
-    "studentid": 31
+    "studentid": 12370137359456197785269642669694263427
 
 
 }
 
 dict_update_record = {
-    "studentid": 30
+    "studentid": 12370137359456197785269642669694263427
 
 }
 dict_stud_id = {
     "studentid": 1
 }
 
-"""
+
 # To display class details
 def test_show_class(test_resp_code):
     abc = test_resp_code
@@ -109,14 +109,8 @@ def test_show_delete_yes(test_resp_code):
     resp = abc.post('/delete', data=dict_delete_data_exception)
     assert resp.status_code == 302
 
-"""
 
 
-# To add new record when the classleader=No
-def test_home(test_resp_code):
-    abc = test_resp_code
-    resp = abc.post('/', data=dict_add_no)
-    assert resp.status_code == 200
 
 
 

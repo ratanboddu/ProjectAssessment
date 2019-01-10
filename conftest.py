@@ -74,7 +74,7 @@ from myflask import db as _db
 
 
 @pytest.fixture(scope='session')
-def test_resp_code():
+def test_resp_code_db():
     test_app = myflask.app
     client = test_app.test_client()
     # with test_app.app_context():
@@ -87,5 +87,11 @@ def test_resp_code():
     yield client
     myflask.db.drop_all()
 
+
+@pytest.fixture(scope="session")
+def test_resp_code():
+    test_app = myflask.app
+    client = test_app.test_client()
+    return client
 
 
