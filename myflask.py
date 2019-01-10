@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 # Connection to the database
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql://root:root@localhost/check'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql://root:root@localhost/checkagain'
 app.config['SECRET_KEY'] = "ratanboddu"
 db = SQLAlchemy(app)
 
