@@ -1,9 +1,10 @@
 """ CRUD OPERATIONS - Python Assessment"""
+import uuid
 import time
 from flask import Flask, flash, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
-import uuid
+
 # pylint: disable=missing-docstring, C0301
 # pylint: disable=invalid-name
 
@@ -20,7 +21,7 @@ class Student(db.Model):
     id = db.Column(db.String(500), unique=True, nullable=False, primary_key=True)
     name = db.Column(db.String(500), unique=False, nullable=False, primary_key=False)
     # Assigning Foreign Key
-    class_id = db.Column(db.String(500), db.ForeignKey('class.id'))
+    class_id = db.Column(db.String(500), db.ForeignKey('class.id',name="student_key_fk", ondelete="CASCADE", onupdate="CASCADE"))
     createdon = db.Column(db.String(500), unique=False, nullable=True, primary_key=False)
     updatedon = db.Column(db.String(500), unique=False, nullable=True, primary_key=False)
 
@@ -29,7 +30,7 @@ class Student(db.Model):
 class Class(db.Model):
     id = db.Column('id', db.String(500), unique=True, nullable=False, primary_key=True)
     name = db.Column(db.String(500), unique=False, nullable=False, primary_key=False)
-    class_leader = db.Column(db.String(500), db.ForeignKey('student.id'), nullable=True)
+    class_leader = db.Column(db.String(500), db.ForeignKey('student.id', name="class_key_fk", ondelete="CASCADE", onupdate="CASCADE"), nullable=True)
     # Making us of foreign_keys to handle multiple JOIN paths
     student = db.relationship("Student", foreign_keys='Student.class_id')
     createdon = db.Column(db.String(500), unique=False, nullable=True, primary_key=False)

@@ -1,5 +1,5 @@
 dict_add_no = {
-    "selectedid": 101,
+    "selectedid": 44426495382941689493289587869381099512,
     "classleader": "No",
     "name": "Viona Gonsalves"
 }
@@ -43,7 +43,7 @@ dict_stud_id = {
     "studentid": 1
 }
 
-
+"""
 # To display class details
 def test_show_class(test_resp_code):
     abc = test_resp_code
@@ -109,6 +109,14 @@ def test_show_delete_yes(test_resp_code):
     resp = abc.post('/delete', data=dict_delete_data_exception)
     assert resp.status_code == 302
 
+"""
+
+
+# To add new record when the classleader=No
+def test_home(test_resp_code):
+    abc = test_resp_code
+    resp = abc.post('/', data=dict_add_no)
+    assert resp.status_code == 200
 
 
 
