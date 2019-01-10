@@ -11,5 +11,6 @@ pylint:
 run:
 	python myflask.py
 
-alembic:
-	alembic upgrade head
+db:
+	alembic upgrade f5d0c232f24e
+	alembic upgrade 4f273a4a6371
