@@ -22,21 +22,21 @@ dict_update_data_yes = {
     "classleader": "Yes",
 
 }
-dict_delete_data = {
-
-    "studentid": 246714335622455588435087160597237604483,
-    "classid": 44426495382941689493289587869381099512
-
-}
+# dict_delete_data = {
+#
+#     "studentid": 246714335622455588435087160597237604483,
+#     "classid": 44426495382941689493289587869381099512
+#
+# }
 dict_delete_data_exception = {
 
-    "studentid": 274535724957053534432097441674764886147,
-    "classid": 56426495382941689493289587869381088534
+    "studentid": 31426495382941689493289587869381054503,
+    "classid": 62426495382941689493289587869381066556
 
 }
 
 dict_update_record = {
-    "studentid": 2272902444848516369510609141741002883
+    "studentid": 128133200461758240586121768451546423427
 
 }
 dict_show_class = {
@@ -65,11 +65,11 @@ def test_show_update(test_resp_code):
     assert resp.status_code == 302
 
 
-# To delete a record without exception
-def test_show_delete(test_resp_code):
-    abc = test_resp_code
-    resp = abc.post('/delete', data=dict_delete_data)
-    assert resp.status_code == 302
+# # To delete a record without exception
+# def test_show_delete(test_resp_code):
+#     abc = test_resp_code
+#     resp = abc.post('/delete', data=dict_delete_data)
+#     assert resp.status_code == 302
 
 
 # To check update record

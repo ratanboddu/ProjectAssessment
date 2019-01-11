@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 # Connection to the database
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql://root:root@localhost/checkagain'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql://root:root@localhost/pytest'
 app.config['SECRET_KEY'] = "ratanboddu"
 db = SQLAlchemy(app)
 
@@ -43,7 +43,6 @@ def home():
         created_on = time.strftime("%x %X", ts)
         class_id_detail = request.form.get("selectedid")
         class_leader = request.form.get("classleader")
-
         if class_leader == "Yes":
             uid_id = uuid.uuid1()
             student_det = Student(id=uid_id.int, name=request.form.get("name"), class_id=class_id_detail, created_on=created_on)
