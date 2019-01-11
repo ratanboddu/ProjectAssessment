@@ -32,15 +32,20 @@
   <tr>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
+      <th scope="col">Created On</th>
+      <th scope="col">Updated On</th>
   </tr>
   </thead>
     <tbody>
 {% if students is not none %}
 <center><h3>Class Leader ID : {{students.class_leader}}</h3></center><br>
+<center><h3>Class Name : {{students.name}}</h3></center><br>
    {% for relation in students.student %}
 <tr>
       <td>{{relation.id}}</td>
       <td>{{relation.name}}</td>
+      <td>{{relation.created_on}}</td>
+      <td>{{relation.updated_on}}</td>
           <br>
       </tr>
      {% endfor %}
