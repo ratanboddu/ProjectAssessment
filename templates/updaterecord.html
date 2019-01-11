@@ -6,28 +6,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-<center><h2>UPDATE RECORD</h2></center>
-
-Current Name of student : <p>{{students.name}}</p><br>
-Current Class ID of student : <p>{{students.class_id}}</p><br>
-Enter the new details : <br>
+<center><h2>UPDATE RECORD</h2></center><hr>
+<center>
+<h3>Current Name of student : <p>{{students.name}}</p><br>
+    Current Class ID of student : <p>{{students.class_id}}</p><br></h3></center><hr>
+<h4>Enter the new details <br><br>
    <form method="POST" action="./update" style="display: inline">
               <input type="hidden" value="{{students.name}}" name="oldName">
               Name : <input type="text" value="{{students.name}}" name="newName">
 
-
-
               <input type="hidden" value="{{students.class_id}}" name="oldClassId">
-
 
         </select>
        Appoint as Class Leader :
        <select name="classleader">
   <option value="Yes">Yes</option>
   <option value="No">No</option>
-   </select>
+   </select><br><br>
               <input type="hidden" value="{{students.id}}" name="studentId">
               <input class="btn btn-success" type="submit" value="Update">
-            </form>
+       <a href="/" class="btn btn-success">Back to Homepage </a><br><br>
+   </form></h4>
 </body>
 </html>

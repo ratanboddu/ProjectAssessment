@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
+<center><i><h1>Update Information</h1></i></center><hr>
+<center><h3>Kindly fill the details</h3><br>
    <form method="POST" action="/">
-        Name:<input type="text" name="name"/>
-
-
-
+        Name : <input type="text" name="name"/><br><br>
         ClassId Dropdown : <select name="selectedid" >
        {% for class in classdetails %}
   <option  value="{{class.id}}">
@@ -18,15 +18,17 @@
 
   </option>
 {% endfor %}
-   </select>
+   </select><br><br>
        Appoint as Class Leader :
        <select name="classleader">
   <option value="Yes">Yes</option>
   <option value="No">No</option>
-   </select>
+   </select><br><br>
 
 
-          <input class="btn btn-success" type="submit" value="Add">
+          <input class="btn btn-success" type="submit" value=" Add Record ">
+       <a href="/" class="btn btn-success">Back to Homepage </a><br><br>
     </form>
+    </center>
 </body>
 </html>
